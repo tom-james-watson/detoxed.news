@@ -1,3 +1,5 @@
+declare module "precss";
+
 declare module "open-graph-scraper" {
   export default function (options: {
     url: string;
