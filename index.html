@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% if title %}{{ title }} - {% endif %}{{ settings.siteName }}
+    </title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <a
+        href="/"
+        class="logo{% if settings.logo == blank %} logo-image{% endif %}"
+        >{% if settings.logo == blank %}<img src="{{ settings.logo }}" />{% else
+        %}{{ settings.siteName }}{% endif %}</a
+      >
+      {% if settings.socials.0 %}
+      <div class="socials">
+        {% for social in settings.socials %}
+        <a class="social" href="{{ social.url }}"
+          >{{ social.image-file | contents }}</a
+        >
+        {% endfor %}
+      </div>
+      {% endif %}
+    </header>
+    <section class="banner">
+      <div class="banner__content">
+        <h1 class="page-title">{{ title }}</h1>
+        {% if about %}
+        <p>{{ about }}</p>
+        {% endif %}
+      </div>
+    </section>
+    <section class="entries">
+      {% for result in news %}
+      <h1 class="date">{{ result.date }}</h3>
+      {% for topic in result.topics %}
+      <h4 class="topic">{{ topic.name }}</h4>
+      {% for entry in topic.entries %}
+      <p class="entry">{{ entry.body }}</p>
+      <p class="entry-tags">{{ entry.tags }}</p>
+      <p class="entry-url">{{ entry.url }}</p>
+      {% if entry.ogMetadata.ogImage.url %}
+      <img src="{{ entry.ogMetadata.ogImage.url }}" width="100" />
+      {% endif %}
+      <p class="entry-tags">{{ entry.og }}</p>
+      {% endfor %}
+      {% endfor %}
+      {% endfor %}
+    </section>
+    <div class="footer">
+      &copy; {{ "now" | date: "%Y" }} {{ settings.siteName }}
+    </div>
+  </body>
+</html>

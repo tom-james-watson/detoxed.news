@@ -1,0 +1,21 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "root": true,
+  "env": {
+    "node": true,
+    "jest/globals": true
+  },
+  "plugins": ["@typescript-eslint", "jest"],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "prettier/prettier": ["error"]
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "2020"
+  }
+}

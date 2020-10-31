@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs",
+    "lib": ["es2019"],
+    "checkJs": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": true,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "outDir": "./out",
+    "rootDir": "./src",
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "*": ["types/*"]
+    },
+    "esModuleInterop": true
+  },
+  "include": ["src"]
+}
