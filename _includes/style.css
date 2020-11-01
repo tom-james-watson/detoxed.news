@@ -53,8 +53,9 @@ main {
     }
 
     .entry-url {
-      font-size: 14px;
       margin-top: 10px;
+      font-size: 14px;
+      color: #636d72;
     }
 
     .entry-img-container {
