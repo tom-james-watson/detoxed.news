@@ -27,10 +27,7 @@ function getTags(li: cheerio.Element): Tag[] {
 }
 
 async function getOgMetadata(url: string): Promise<OgMetadata | undefined> {
-  if (
-    process.env.NODE_ENV === "test" ||
-    process.env.NODE_ENV === "development"
-  ) {
+  if (process.env.NODE_ENV === "test") {
     // Don't want to fetch og metadata in tests, takes too long
     return {
       ogDescription: "Placeholder description",
@@ -49,6 +46,19 @@ async function getOgMetadata(url: string): Promise<OgMetadata | undefined> {
 
   if (error) {
     throw errorDetails;
+  }
+
+  // Check whether image can be hotlinked. If you don't want your image to be
+  // hotlinked, why do you put it in your open graph metadata...
+  const res = await axios.get(result.ogImage.url, {
+    // Placeholder till we get a domain
+    headers: {
+      Referer: "https://wikipedia.org",
+    },
+  });
+
+  if (res.status !== 200) {
+    throw new Error("ogImage unreachable");
   }
 
   console.log(`Got og metadata for ${url}`);

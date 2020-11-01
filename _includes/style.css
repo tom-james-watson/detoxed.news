@@ -1,6 +1,7 @@
 body {
   max-width: 800px;
   margin: auto;
+  line-height: 1.3;
 
   header {
     text-align: center;
@@ -14,9 +15,52 @@ h1, h2, h3, h4, h5 {
 main {
   font-family: Arial;
   padding: 0 10px;
-}
 
-section {
+  .entry-tag {
+    &:not(:last-child) {
+      &:after {
+        content: "|";
+      }
+    }
+
+    a {
+      text-decoration: none;
+      font-weight: 100;
+    }
+  }
+
+  .entry {
+    display: flex;
+    margin-top: 20px;
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 20px;
+
+    &:first-child {
+      border-top: 1px solid #e1e1e1;
+      padding: 20px 0;
+    }
+
+    .entry-body {
+      margin-top: 10px;
+    }
+
+    .entry-external-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-left: 20px;
+
+      .entry-img {
+        width: 200px;
+      }
+
+      .entry-url {
+        width: 200px;
+        align-self: start;
+      }
+    }
+  }
 }
 
 footer {
@@ -24,4 +68,24 @@ footer {
   padding: 10px;
   font-size: 12px;
   font-style: italic;
+}
+
+@media only screen and (max-width: 600px) {
+  main {
+    .entry {
+      flex-direction: column;
+
+      .entry-external-container {
+        margin-left: 0;
+        margin-top: 20px;
+
+        &.with-img {
+          .entry-url {
+            align-self: center;
+            width: initial;
+          }
+        }
+      }
+    }
+  }
 }
