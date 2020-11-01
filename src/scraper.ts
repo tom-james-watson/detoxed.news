@@ -249,7 +249,7 @@ export default async function scrapeEntries(): Promise<ScraperResult[]> {
   const $ = cheerio.load(res.data);
 
   // Get the last 3 days of entries.
-  const days = $(".vevent").toArray().slice(0, 3);
+  const days = $(".vevent").toArray().slice(0, 4);
 
   const results: ScraperResult[] = [];
 

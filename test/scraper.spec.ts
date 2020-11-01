@@ -6,7 +6,7 @@ describe("scraper", () => {
 
     // console.log(JSON.stringify(results, null, 2));
 
-    expect(results.length).toEqual(3);
+    expect(results.length).toEqual(4);
 
     const result = results[0];
     expect(typeof result.date).toEqual("string");
