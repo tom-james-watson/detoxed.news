@@ -8,26 +8,22 @@ const BASE_URL = "https://en.wikipedia.org";
 /**
  * Extract a Tag from an li element.
  */
-function getTag(li: cheerio.Element): Tag {
-  if (li.children[0].type === "tag") {
-    return {
-      name: li.children[0].attribs.title,
-      url: `${BASE_URL}${li.children[0].attribs.href}`,
-    };
-  }
-
-  let tagName = "";
-  li.children.forEach((liChild: cheerio.Element): void => {
-    if (liChild.type === "text") {
-      tagName += liChild.data;
-    } else if (liChild.type === "tag") {
-      tagName += liChild.attribs.title;
-    }
-  });
-
-  return {
-    name: tagName,
-  };
+function getTags(li: cheerio.Element): Tag[] {
+  return li.children
+    .filter((child: cheerio.Element): boolean => {
+      return child.name === "a";
+    })
+    .map(
+      (child: cheerio.Element): Tag => {
+        if (child.attribs.href === undefined) {
+          debugger;
+        }
+        return {
+          name: child.attribs.title,
+          url: `${BASE_URL}${child.attribs.href}`,
+        };
+      }
+    );
 }
 
 async function getOgMetadata(url: string): Promise<OgMetadata | undefined> {
@@ -67,9 +63,14 @@ async function getOgMetadata(url: string): Promise<OgMetadata | undefined> {
 /**
  * Extract an Entry from an li element.
  */
-async function getEntry(li: cheerio.Element, tags: Tag[]): Promise<Entry> {
+async function getEntry(
+  li: cheerio.Element,
+  tags: Tag[],
+  dayIndex: number
+): Promise<Entry> {
   let body = "";
   let url: string | undefined;
+  let sourceName: string | undefined;
   let ogMetadata: OgMetadata | undefined;
 
   if (li.children) {
@@ -77,10 +78,24 @@ async function getEntry(li: cheerio.Element, tags: Tag[]): Promise<Entry> {
       const liChild = li.children[i];
       if (i === li.children.length - 1) {
         url = liChild.attribs.href;
-        try {
-          ogMetadata = await getOgMetadata(url);
-        } catch (err) {
-          console.warn("Failed to get og metadata:", err);
+        // Sometimes the article link is plain text, sometimes it's
+        // (<i>text</i>).
+        if (liChild.children.length === 1) {
+          sourceName = liChild.children[0].data
+            ? liChild.children[0].data.replace(/[()]/g, "")
+            : undefined;
+        } else {
+          sourceName = liChild.children[1].children[0].data
+            ? liChild.children[1].children[0].data.replace(/[()]/g, "")
+            : undefined;
+        }
+
+        if (dayIndex === 0) {
+          try {
+            ogMetadata = await getOgMetadata(url);
+          } catch (err) {
+            console.warn("Failed to get og metadata:", err);
+          }
         }
         continue;
       }
@@ -99,6 +114,7 @@ async function getEntry(li: cheerio.Element, tags: Tag[]): Promise<Entry> {
   return {
     body,
     ogMetadata,
+    sourceName,
     tags,
     url,
   };
@@ -115,11 +131,22 @@ async function getEntry(li: cheerio.Element, tags: Tag[]): Promise<Entry> {
  */
 async function getEntriesFromUl(
   ul: cheerio.Element,
-  tags: Tag[]
+  tags: Tag[],
+  dayIndex: number
 ): Promise<Entry[]> {
   const entries: Entry[] = [];
 
+  // There's enough coverage of this elsewhere, plus this generally generates
+  // too many entries. Let's save readers from covid-overload.
+  if (tags.some((tag) => tag.name === "COVID-19 pandemic")) {
+    return entries;
+  }
+
   for (const li of ul.children) {
+    if (li.type === "text") {
+      continue;
+    }
+
     const childUl =
       li.children &&
       li.children.find((child: cheerio.Element): boolean => {
@@ -127,11 +154,16 @@ async function getEntriesFromUl(
       });
 
     if (childUl) {
-      entries.push(...(await getEntriesFromUl(childUl, [...tags, getTag(li)])));
+      entries.push(
+        ...(await getEntriesFromUl(
+          childUl,
+          [...tags, ...getTags(li)],
+          dayIndex
+        ))
+      );
     } else {
-      entries.push(await getEntry(li, tags));
+      entries.push(await getEntry(li, tags, dayIndex));
     }
-    debugger;
   }
 
   return entries;
@@ -146,7 +178,8 @@ async function getEntriesFromUl(
  */
 async function getEntriesForDay(
   $: cheerio.Root,
-  day: cheerio.Element
+  day: cheerio.Element,
+  dayIndex: number
 ): Promise<ScraperResult> {
   const date = day.attribs["aria-label"];
 
@@ -173,18 +206,24 @@ async function getEntriesForDay(
       if (!topicMap[topicName]) {
         topicMap[topicName] = [];
       }
-      topicMap[topicName].push(...(await getEntriesFromUl(topLevelItem, [])));
+      topicMap[topicName].push(
+        ...(await getEntriesFromUl(topLevelItem, [], dayIndex))
+      );
     }
   }
 
-  const topics: Topic[] = Object.keys(topicMap).map(
-    (topicName: string): Topic => {
-      return {
-        name: topicName,
-        entries: topicMap[topicName],
-      };
-    }
-  );
+  const topics: Topic[] = Object.keys(topicMap)
+    .filter((topicName: string): boolean => {
+      return topicMap[topicName].length > 0;
+    })
+    .map(
+      (topicName: string): Topic => {
+        return {
+          name: topicName,
+          entries: topicMap[topicName],
+        };
+      }
+    );
 
   return {
     date,
@@ -199,12 +238,14 @@ export default async function scrapeEntries(): Promise<ScraperResult[]> {
 
   const $ = cheerio.load(res.data);
 
+  // Get the last 3 days of entries.
   const days = $(".vevent").toArray();
 
   const results: ScraperResult[] = [];
 
-  for (const day of days) {
-    const result = await getEntriesForDay($, day);
+  for (let dayIndex = 0; dayIndex < days.length; dayIndex++) {
+    const day = days[dayIndex];
+    const result = await getEntriesForDay($, day, dayIndex);
     if (Object.keys(result.topics).length > 0) {
       results.push(result);
     }
@@ -212,3 +253,5 @@ export default async function scrapeEntries(): Promise<ScraperResult[]> {
 
   return results;
 }
+
+// scrapeEntries();

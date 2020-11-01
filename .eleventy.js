@@ -2,6 +2,8 @@ const path = require("path");
 const postcss = require("postcss");
 
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addPassthroughCopy("static");
+
   eleventyConfig.addPairedShortcode("postcss", async (code) => {
     // for relative path CSS imports
     const filepath = path.join(__dirname, "_includes/style.css");

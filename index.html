@@ -3,9 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      {% if title %}{{ title }} - {% endif %}{{ settings.siteName }}
-    </title>
+    <title>{{ settings.siteName }}</title>
     <style>
       {% postcss %}
         {% include style.css %}
@@ -14,47 +12,45 @@
   </head>
   <body>
     <header class="header">
-      <a
-        href="/"
-        class="logo{% if settings.logo == blank %} logo-image{% endif %}"
-        >{% if settings.logo == blank %}<img src="{{ settings.logo }}" />{% else
-        %}{{ settings.siteName }}{% endif %}</a
-      >
-      {% if settings.socials.0 %}
-      <div class="socials">
-        {% for social in settings.socials %}
-        <a class="social" href="{{ social.url }}"
-          >{{ social.image-file | contents }}</a
-        >
-        {% endfor %}
-      </div>
-      {% endif %}
+      <h1>{{ settings.siteName }}</h1>
     </header>
-    <section class="banner">
-      <div class="banner__content">
-        <h1 class="page-title">{{ title }}</h1>
-        {% if about %}
-        <p>{{ about }}</p>
-        {% endif %}
-      </div>
-    </section>
-    <section class="entries">
-      {% for result in news %}
-      <h1 class="date">{{ result.date }}</h1>
-      {% for topic in result.topics %}
-      <h4 class="topic">{{ topic.name }}</h4>
-      {% for entry in topic.entries %}
-      <p class="entry">{{ entry.body }}</p>
-      <p class="entry-tags">{{ entry.tags }}</p>
-      <p class="entry-url">{{ entry.url }}</p>
-      {% if entry.ogMetadata.ogImage.url %}
-      <img src="{{ entry.ogMetadata.ogImage.url }}" width="100" />
-      {% endif %}
-      <p class="entry-tags">{{ entry.og }}</p>
-      {% endfor %} {% endfor %} {% endfor %}
-    </section>
-    <div class="footer">
-      &copy; {{ "now" | date: "%Y" }} {{ settings.siteName }}
-    </div>
+    <main>
+      {% for dayIndex in (0..news.length) %}
+        <section class="day">
+          <h2 class="date">{{ news[dayIndex].date }}</h2>
+          {% for topic in news[dayIndex].topics %}
+            <section class="topic">
+              <h3 class="topic">{{ topic.name }}</h3>
+              {% for entry in topic.entries %}
+                <section class="entry">
+                  <p class="entry">{{ entry.body }}</p>
+                  {% for tag in entry.tags %}
+                    <span class="entry-tag">
+                      <a href="{{ tag.url }}" rel="nofollow noopener">
+                        {{ tag.name }}
+                      </a>
+                    </span>
+                  {% endfor %}
+                  {% if dayIndex == 0 %}
+                    <a href="{{ entry.url }}">
+                      {% if entry.ogMetadata.ogImage.url %}
+                        <img src="{{ entry.ogMetadata.ogImage.url }}" width="100" />
+                      {% endif %}
+                    </a>
+                  {% else %}
+                    <a href="{{ entry.url }}">
+                      {{ entry.sourceName }} <img src="/static/images/external-link-icon.svg" />
+                    </a>
+                  {% endif %}
+                </section>
+              {% endfor %}
+            </section>
+          {% endfor %}
+        </section>
+      {% endfor %}
+    </main>
+    <footer>
+      Text is sourced from <a href="https://en.wikipedia.org/wiki/Portal:Current_events" rel="nofollow noopener">https://en.wikipedia.org/wiki/Portal:Current_events</a> and made available under the <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="nofollow noopener">Creative Commons Attribution-ShareAlike License</a>.
+    </footer>
   </body>
 </html>

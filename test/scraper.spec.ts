@@ -8,7 +8,7 @@ describe("scraper", () => {
 
     expect(results.length).toEqual(7);
 
-    const result = results[1];
+    const result = results[0];
     expect(typeof result.date).toEqual("string");
     expect(result.topics.length).toBeGreaterThan(0);
 

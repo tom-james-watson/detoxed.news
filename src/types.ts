@@ -6,6 +6,7 @@ export interface ScraperResult {
 export interface Entry {
   body: string;
   ogMetadata?: OgMetadata;
+  sourceName?: string;
   tags: Tag[];
   url?: string;
 }

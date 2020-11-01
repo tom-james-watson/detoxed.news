@@ -1,10 +1,3 @@
 {
-  "siteName": "Test title",
-  "logo": "",
-  "socials": [
-    {
-      "url": "https://twitter.com/tom_j_watson",
-      "image-file": "/images/twitter_logo_blue.svg"
-    }
-  ]
+  "siteName": "Wiki News"
 }

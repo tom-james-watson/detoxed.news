@@ -1,3 +1,27 @@
-* {
-  color: green;
+body {
+  max-width: 800px;
+  margin: auto;
+
+  header {
+    text-align: center;
+  }
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: Georgia;
+}
+
+main {
+  font-family: Arial;
+  padding: 0 10px;
+}
+
+section {
+}
+
+footer {
+  font-family: Arial;
+  padding: 10px;
+  font-size: 12px;
+  font-style: italic;
 }
