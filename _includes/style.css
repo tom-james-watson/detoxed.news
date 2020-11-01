@@ -32,7 +32,7 @@ main {
     padding: 5px 10px;
     background: #364676;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 13px;
     text-decoration: none;
     color: #ffffff;
     white-space: pre-line;
@@ -50,7 +50,7 @@ main {
     }
 
     .entry-url {
-      font-size: 14px;
+      font-size: 13px;
       margin-top: 10px;
     }
 
