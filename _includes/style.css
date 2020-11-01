@@ -17,16 +17,16 @@ main {
   padding: 0 10px;
 
   .entry-tag {
-    &:not(:last-child) {
-      &:after {
-        content: "|";
-      }
-    }
-
-    a {
-      text-decoration: none;
-      font-weight: 100;
-    }
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    padding: 5px 10px;
+    background: #1c1c1c;
+    border-radius: 5px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #ffffff;
+    white-space: nowrap;
   }
 
   .entry {
@@ -38,10 +38,6 @@ main {
     &:first-child {
       border-top: 1px solid #e1e1e1;
       padding: 20px 0;
-    }
-
-    .entry-body {
-      margin-top: 10px;
     }
 
     .entry-external-container {

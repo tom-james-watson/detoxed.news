@@ -26,14 +26,10 @@
                   <div>
                     <div>
                       {% for tag in entry.tags %}
-                        <span class="entry-tag">
-                          <a href="{{ tag.url }}" rel="nofollow noopener">
-                            {{ tag.name }}
-                          </a>
-                        </span>
+                        <a class="entry-tag" href="{{ tag.url }}" rel="nofollow noopener">{{ tag.name }}</a>
                       {% endfor %}
                     </div>
-                    <div class="entry-body">{{ entry.body }}</div>
+                    <div>{{ entry.body }}</div>
                   </div>
                   {% if dayIndex == 0 and entry.ogMetadata.ogImage.url %}
                     <div class="entry-external-container with-img">
