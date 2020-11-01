@@ -2,10 +2,11 @@ body {
   max-width: 800px;
   margin: auto;
   line-height: 1.3;
+}
 
-  header {
-    text-align: center;
-  }
+header {
+  text-align: center;
+  text-transform: uppercase;
 }
 
 h1, h2, h3, h4, h5 {
@@ -15,6 +16,10 @@ h1, h2, h3, h4, h5 {
 main {
   font-family: Arial;
   padding: 0 10px;
+
+  .topic {
+    text-transform: uppercase;
+  }
 
   .entry-tag {
     display: inline-block;
