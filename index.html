@@ -6,13 +6,10 @@
     <title>
       {% if title %}{{ title }} - {% endif %}{{ settings.siteName }}
     </title>
-<style>
+    <style>
       {% postcss %}
-
         {% include style.css %}
-
       {% endpostcss %}
-
     </style>
   </head>
   <body>
@@ -43,7 +40,7 @@
     </section>
     <section class="entries">
       {% for result in news %}
-      <h1 class="date">{{ result.date }}</h3>
+      <h1 class="date">{{ result.date }}</h1>
       {% for topic in result.topics %}
       <h4 class="topic">{{ topic.name }}</h4>
       {% for entry in topic.entries %}
@@ -54,9 +51,7 @@
       <img src="{{ entry.ogMetadata.ogImage.url }}" width="100" />
       {% endif %}
       <p class="entry-tags">{{ entry.og }}</p>
-      {% endfor %}
-      {% endfor %}
-      {% endfor %}
+      {% endfor %} {% endfor %} {% endfor %}
     </section>
     <div class="footer">
       &copy; {{ "now" | date: "%Y" }} {{ settings.siteName }}
