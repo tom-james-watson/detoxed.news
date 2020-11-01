@@ -30,25 +30,18 @@
                         <a class="entry-tag" href="{{ tag.url }}" rel="nofollow noopener">{{ tag.name }}</a>
                       {% endfor %}
                     </div>
-                    {% if dayIndex != 0 or entry.ogMetadata.ogImage.url == empty %}
-                      <div class="entry-url inline">
-                        Source:
-                        <a href="{{ entry.url }}">
-                          {{ entry.sourceName }} <img src="/static/images/external-link-icon.svg" />
-                        </a>
-                      </div>
-                    {% endif %}
+                    <div class="entry-url">
+                      Source:
+                      <a href="{{ entry.url }}">
+                        {{ entry.sourceName }} <img src="/static/images/external-link-icon.svg" />
+                      </a>
+                    </div>
                   </div>
                   {% if dayIndex == 0 and entry.ogMetadata.ogImage.url %}
-                    <div class="entry-external-container with-img">
+                    <div class="entry-img-container">
                       <a href="{{ entry.url }}">
                         <img class="entry-img" src="{{ entry.ogMetadata.ogImage.url }}" width="100" />
                       </a>
-                      <div class="entry-url">
-                        <a href="{{ entry.url }}">
-                          {{ entry.sourceName }} <img src="/static/images/external-link-icon.svg" />
-                        </a>
-                      </div>
                     </div>
                   {% endif %}
                 </section>

@@ -51,32 +51,18 @@ main {
 
     .entry-url {
       font-size: 14px;
-
-      &.inline {
-        margin-top: 10px;
-      }
+      margin-top: 10px;
     }
 
-    .entry-external-container {
+    .entry-img-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       margin-left: 20px;
 
-      &.with-img {
-        .entry-img {
-          width: 250px;
-        }
-      }
-
-      .entry-url {
+      .entry-img {
         width: 250px;
-        align-self: start;
-
-        &.inline {
-          margin-top: 10px;
-        }
       }
     }
   }
