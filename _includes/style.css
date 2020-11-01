@@ -27,7 +27,7 @@ main {
 
   .entry-tag {
     display: inline-block;
-    margin-bottom: 10px;
+    margin-top: 10px;
     margin-right: 5px;
     padding: 5px 10px;
     background: #364676;
@@ -49,6 +49,14 @@ main {
       padding: 20px 0;
     }
 
+    .entry-url {
+      font-size: 14px;
+
+      &.inline {
+        margin-top: 10px;
+      }
+    }
+
     .entry-external-container {
       display: flex;
       flex-direction: column;
@@ -65,6 +73,10 @@ main {
       .entry-url {
         width: 250px;
         align-self: start;
+
+        &.inline {
+          margin-top: 10px;
+        }
       }
     }
   }

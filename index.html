@@ -24,27 +24,31 @@
               {% for entry in topic.entries %}
                 <section class="entry">
                   <div>
+                    <div>{{ entry.body }}</div>
                     <div>
                       {% for tag in entry.tags %}
                         <a class="entry-tag" href="{{ tag.url }}" rel="nofollow noopener">{{ tag.name }}</a>
                       {% endfor %}
                     </div>
-                    <div>{{ entry.body }}</div>
+                    {% if dayIndex != 0 or entry.ogMetadata.ogImage.url == empty %}
+                      <div class="entry-url inline">
+                        Source:
+                        <a href="{{ entry.url }}">
+                          {{ entry.sourceName }} <img src="/static/images/external-link-icon.svg" />
+                        </a>
+                      </div>
+                    {% endif %}
                   </div>
                   {% if dayIndex == 0 and entry.ogMetadata.ogImage.url %}
                     <div class="entry-external-container with-img">
                       <a href="{{ entry.url }}">
                         <img class="entry-img" src="{{ entry.ogMetadata.ogImage.url }}" width="100" />
                       </a>
-                      <a class="entry-url" href="{{ entry.url }}">
-                        {{ entry.sourceName }} <img src="/static/images/external-link-icon.svg" />
-                      </a>
-                    </div>
-                  {% else %}
-                    <div class="entry-external-container">
-                      <a class="entry-url" href="{{ entry.url }}">
-                        {{ entry.sourceName }} <img src="/static/images/external-link-icon.svg" />
-                      </a>
+                      <div class="entry-url">
+                        <a href="{{ entry.url }}">
+                          {{ entry.sourceName }} <img src="/static/images/external-link-icon.svg" />
+                        </a>
+                      </div>
                     </div>
                   {% endif %}
                 </section>
