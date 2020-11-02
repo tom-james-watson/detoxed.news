@@ -2,6 +2,7 @@ import axios from "axios";
 import cheerio from "cheerio";
 import ogScraper from "open-graph-scraper";
 import { Entry, OgMetadata, ScraperResult, Tag, Topic } from "./types";
+import shuffle from './shuffle'
 
 const BASE_URL = "https://en.wikipedia.org";
 
@@ -230,6 +231,11 @@ async function getEntriesForDay(
         };
       }
     );
+
+  // Randomize the order of the topics. Wikipedia is just alphabetical and
+  // maybe it gets boring to always read about Armed conflicts and attacks
+  // first.
+  shuffle(topics)
 
   return {
     date,
