@@ -19,8 +19,8 @@
         <h2>{{ news[dayIndex].date }}</h2>
         <section class="day">
           {% for topic in news[dayIndex].topics %}
-            <h3 class="topic">{{ topic.name }}</h3>
-            <section>
+            <h3 class="topic-header">{{ topic.name }}</h3>
+            <section class="topic">
               {% for entry in topic.entries %}
                 <section class="entry">
                   <div>

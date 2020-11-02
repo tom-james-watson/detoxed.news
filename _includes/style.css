@@ -23,8 +23,12 @@ main {
   font-family: Arial;
   padding: 0 10px;
 
-  .topic {
+  .topic-header {
     text-transform: uppercase;
+  }
+
+  .topic {
+    margin-bottom: 40px;
   }
 
   .entry-tag {
@@ -44,12 +48,10 @@ main {
   .entry {
     display: flex;
     margin-top: 20px;
-    border-bottom: 1px solid #e1e1e1;
     padding-bottom: 20px;
 
-    &:first-child {
-      border-top: 1px solid #e1e1e1;
-      padding: 20px 0;
+    &:not(:last-child) {
+      border-bottom: 1px solid #e1e1e1;
     }
 
     .entry-url {
