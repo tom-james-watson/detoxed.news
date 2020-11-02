@@ -76,7 +76,7 @@ async function getOgMetadata(url: string): Promise<OgMetadata | undefined> {
 async function getEntry(
   li: cheerio.Element,
   tags: Tag[],
-  dayIndex: number
+  withOg: boolean
 ): Promise<Entry> {
   let body = "";
   let url: string | undefined;
@@ -100,7 +100,7 @@ async function getEntry(
             : undefined;
         }
 
-        if (dayIndex === 0) {
+        if (withOg) {
           try {
             ogMetadata = await getOgMetadata(url);
           } catch (err) {
@@ -142,7 +142,7 @@ async function getEntry(
 async function getEntriesFromUl(
   ul: cheerio.Element,
   tags: Tag[],
-  dayIndex: number
+  withOg: boolean
 ): Promise<Entry[]> {
   const entries: Entry[] = [];
 
@@ -165,14 +165,10 @@ async function getEntriesFromUl(
 
     if (childUl) {
       entries.push(
-        ...(await getEntriesFromUl(
-          childUl,
-          [...tags, ...getTags(li)],
-          dayIndex
-        ))
+        ...(await getEntriesFromUl( childUl, [...tags, ...getTags(li)], withOg))
       );
     } else {
-      entries.push(await getEntry(li, tags, dayIndex));
+      entries.push(await getEntry(li, tags, withOg));
     }
   }
 
@@ -189,7 +185,7 @@ async function getEntriesFromUl(
 async function getEntriesForDay(
   $: cheerio.Root,
   day: cheerio.Element,
-  dayIndex: number
+  withOg: boolean
 ): Promise<ScraperResult> {
   const date = day.attribs["aria-label"];
 
@@ -217,7 +213,7 @@ async function getEntriesForDay(
         topicMap[topicName] = [];
       }
       topicMap[topicName].push(
-        ...(await getEntriesFromUl(topLevelItem, [], dayIndex))
+        ...(await getEntriesFromUl(topLevelItem, [], withOg))
       );
     }
   }
@@ -253,11 +249,14 @@ export default async function scrapeEntries(): Promise<ScraperResult[]> {
 
   const results: ScraperResult[] = [];
 
-  for (let dayIndex = 0; dayIndex < days.length; dayIndex++) {
-    const day = days[dayIndex];
-    const result = await getEntriesForDay($, day, dayIndex);
+  let withOg = true
+
+  for (const day of days) {
+    const result = await getEntriesForDay($, day, withOg);
+
     if (Object.keys(result.topics).length > 0) {
       results.push(result);
+      withOg = false;
     }
   }
 
