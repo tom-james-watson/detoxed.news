@@ -8,6 +8,10 @@ body {
 header {
   text-align: center;
   text-transform: uppercase;
+
+  h1 {
+    font-size: 50px;
+  }
 }
 
 h1, h2, h3, h4, h5 {
@@ -23,7 +27,12 @@ main {
   font-family: Arial;
   padding: 0 10px;
 
+  .day-header {
+    font-size: 30px;
+  }
+
   .topic-header {
+    font-size: 20px;
     text-transform: uppercase;
   }
 
@@ -82,7 +91,25 @@ footer {
 }
 
 @media only screen and (max-width: 600px) {
+  header {
+    h1 {
+      font-size: 30px;
+    }
+  }
+
   main {
+    .day-header {
+      font-size: 25px;
+    }
+
+    .topic-header {
+      font-size: 18px;
+    }
+
+    .topic {
+      margin-bottom: 20px;
+    }
+
     .entry {
       flex-direction: column-reverse;
 

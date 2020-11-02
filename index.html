@@ -16,7 +16,7 @@
     </header>
     <main>
       {% for dayIndex in (0..news.length) %}
-        <h2>{{ news[dayIndex].date }}</h2>
+        <h2 class="day-header">{{ news[dayIndex].date }}</h2>
         <section class="day">
           {% for topic in news[dayIndex].topics %}
             <h3 class="topic-header">{{ topic.name }}</h3>
