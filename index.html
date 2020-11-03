@@ -33,14 +33,14 @@
                     <div class="entry-url">
                       Source:
                       <a href="{{ entry.url }}">
-                        {{ entry.sourceName }} <img src="/static/images/external-link-icon.svg" />
+                        {{ entry.sourceName }} <img alt="external link" src="/static/images/external-link-icon.svg" />
                       </a>
                     </div>
                   </div>
                   {% if dayIndex == 0 and entry.ogMetadata.ogImage.url %}
                     <div class="entry-img-container">
                       <a href="{{ entry.url }}">
-                        <img class="entry-img" src="{{ entry.ogMetadata.ogImage.url }}" width="100" />
+                        <img class="entry-img" alt="source's featured photo" loading="lazy" src="{{ entry.ogMetadata.ogImage.url }}" width="100" />
                       </a>
                     </div>
                   {% endif %}
