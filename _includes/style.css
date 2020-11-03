@@ -11,11 +11,12 @@ header {
 
   h1 {
     font-size: 50px;
+    font-weight: 900;
   }
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: Georgia;
+  font-family: Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol ;
   color: #1e2426;
 }
 
@@ -23,8 +24,12 @@ a {
   color: inherit;
 }
 
+main,
+footer {
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+}
+
 main {
-  font-family: Arial;
   padding: 0 10px;
 
   .day-header {
@@ -65,15 +70,14 @@ main {
 
     .entry-url {
       margin-top: 10px;
-      font-size: 14px;
-      color: #636d72;
+      color: #5c7080;
     }
 
     .entry-img-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: start;
       margin-left: 20px;
 
       .entry-img {
@@ -84,7 +88,6 @@ main {
 }
 
 footer {
-  font-family: Arial;
   padding: 10px;
   font-size: 12px;
   font-style: italic;
