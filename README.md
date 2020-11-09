@@ -14,11 +14,11 @@ What I would like is to stay informed, but in the least draining way possible.
 
 A fantastic source for a balanced, low-drama summary of news is the [Wikipedia Current Events Portal](https://en.wikipedia.org/wiki/Portal:Current_events). It is a user-curated list of current events per day, with items being tagged under a series of nested categories.
 
-https://detoxed.news scrapes this page, collating the entries and associating them with their categories, which are treated as "tags", and the linked source article. Whilst the Current Events Portal is informative, it's extremely text-heavy and a bit of a chore to read. https://detoxed.news attempts to prevent this same information in a more user-friendly and digestable way.
+https://detoxed.news scrapes this page, collating the entries and associating them with their categories, which are treated as "tags", and the linked source article. Whilst the Current Events Portal is informative, it's extremely text-heavy and a bit of a chore to read. https://detoxed.news attempts to present this same information in a more user-friendly and digestable way.
 
 ## The Tech
 
-The site is a static site built using [11ty](https://www.11ty.dev/). The build will dynamically scrape the current events portal and generate JSON which is then used to compile the `index.html` file.
+The site is a static site built using [11ty](https://www.11ty.dev/). A build dynamically scrapes the current events portal and generates JSON which is then used to compile the `index.html` file.
 
 The site is hosted on Netlify and a new build is kicked off via a webhook every hour. This means the content of the site will keep in sync with the content of the current events portal without any kind of manual intervention ever being necessary.
 
