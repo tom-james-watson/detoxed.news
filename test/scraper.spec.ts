@@ -17,7 +17,7 @@ describe("scraper", () => {
 
     const story = topic.entries[0];
     expect(typeof story.body).toEqual("string");
-    expect(story.tags.length).toBeGreaterThan(0);
+    expect(story.tags.length).toBeGreaterThanOrEqual(0);
     expect(typeof story.tags[0].name).toEqual("string");
     expect(story.ogMetadata).toEqual({
       ogDescription: "Placeholder description",
