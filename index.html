@@ -16,10 +16,10 @@
       <h1>{{ settings.siteName }}</h1>
     </header>
     <main>
-      {% for dayIndex in (0..news.length) %}
-        <h2 class="day-header">{{ news[dayIndex].date }}</h2>
+      {% for day in news %}
+        <h2 class="day-header">{{ day.date }}</h2>
         <section class="day">
-          {% for topic in news[dayIndex].topics %}
+          {% for topic in day.topics %}
             <h3 class="topic-header">{{ topic.name }}</h3>
             <section class="topic">
               {% for entry in topic.entries %}
@@ -38,7 +38,7 @@
                       </a>
                     </div>
                   </div>
-                  {% if dayIndex == 0 and entry.ogMetadata.ogImage.url %}
+                  {% if entry.ogMetadata.ogImage.url %}
                     <div class="entry-img-container">
                       <a href="{{ entry.url }}">
                         <img class="entry-img" alt="source's featured photo" loading="lazy" src="{{ entry.ogMetadata.ogImage.url }}" width="100" />

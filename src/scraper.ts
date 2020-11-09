@@ -2,7 +2,7 @@ import axios from "axios";
 import cheerio from "cheerio";
 import ogScraper from "open-graph-scraper";
 import { Entry, OgMetadata, ScraperResult, Tag, Topic } from "./types";
-import shuffle from './shuffle'
+import shuffle from "./shuffle";
 
 const BASE_URL = "https://en.wikipedia.org";
 
@@ -166,7 +166,7 @@ async function getEntriesFromUl(
 
     if (childUl) {
       entries.push(
-        ...(await getEntriesFromUl( childUl, [...tags, ...getTags(li)], withOg))
+        ...(await getEntriesFromUl(childUl, [...tags, ...getTags(li)], withOg))
       );
     } else {
       entries.push(await getEntry(li, tags, withOg));
@@ -235,7 +235,7 @@ async function getEntriesForDay(
   // Randomize the order of the topics. Wikipedia is just alphabetical and
   // maybe it gets boring to always read about Armed conflicts and attacks
   // first.
-  shuffle(topics)
+  shuffle(topics);
 
   return {
     date,
@@ -255,14 +255,26 @@ export default async function scrapeEntries(): Promise<ScraperResult[]> {
 
   const results: ScraperResult[] = [];
 
-  let withOg = true
+  let withOg = true;
+  let imageEntries = 0;
 
   for (const day of days) {
     const result = await getEntriesForDay($, day, withOg);
 
     if (Object.keys(result.topics).length > 0) {
       results.push(result);
-      withOg = false;
+
+      for (const topic of result.topics) {
+        for (const entry of topic.entries) {
+          if (entry.ogMetadata) {
+            imageEntries += 1;
+          }
+        }
+      }
+
+      if (imageEntries >= 5) {
+        withOg = false;
+      }
     }
   }
 
