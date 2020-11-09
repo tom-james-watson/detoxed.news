@@ -1,13 +1,14 @@
 body {
   max-width: 800px;
   margin: auto;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
   line-height: 1.3;
   color: #333739;
+  background: #f5f8fa;
 }
 
 header {
   text-align: center;
-  text-transform: uppercase;
 
   h1 {
     font-size: 50px;
@@ -16,7 +17,6 @@ header {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol ;
   color: #1e2426;
 }
 
@@ -24,21 +24,20 @@ a {
   color: inherit;
 }
 
-main,
-footer {
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
-}
-
 main {
   padding: 0 10px;
 
   .day-header {
+    padding-left: 10px;
     font-size: 30px;
+    line-height: 50px;
+    border-left: 5px solid #A82A2A;
   }
 
   .topic-header {
     font-size: 20px;
     text-transform: uppercase;
+    color: #007374;
   }
 
   .topic {
@@ -83,12 +82,14 @@ main {
 
       .entry-img {
         width: 250px;
+        border-radius: 3px;
       }
     }
   }
 }
 
 footer {
+  margin-bottom: 40px;
   padding: 10px;
   font-size: 12px;
   font-style: italic;
@@ -104,6 +105,8 @@ footer {
   main {
     .day-header {
       font-size: 25px;
+      line-height: 40px;
+      border-left: 4px solid #A82A2A;
     }
 
     .topic-header {
