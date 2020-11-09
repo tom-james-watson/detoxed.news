@@ -16,9 +16,6 @@ function getTags(li: cheerio.Element): Tag[] {
     })
     .map(
       (child: cheerio.Element): Tag => {
-        if (child.attribs.href === undefined) {
-          debugger;
-        }
         return {
           name: child.attribs.title,
           url: `${BASE_URL}${child.attribs.href}`,
@@ -243,6 +240,9 @@ async function getEntriesForDay(
   };
 }
 
+/**
+ * Scrape news entries from the wikipedia current events portal.
+ */
 export default async function scrapeEntries(): Promise<ScraperResult[]> {
   const res = await axios.get(
     "https://en.wikipedia.org/wiki/Portal:Current_events"
@@ -280,5 +280,3 @@ export default async function scrapeEntries(): Promise<ScraperResult[]> {
 
   return results;
 }
-
-// scrapeEntries();

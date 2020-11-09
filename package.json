@@ -1,8 +1,8 @@
 {
-  "name": "wiki-news",
-  "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "name": "detoxed-news",
+  "version": "1.0.0",
+  "description": "The important news, without the toxicity.",
   "scripts": {
     "build": "eleventy",
     "debug": "NODE_ENV=development DEBUG=Eleventy* eleventy --serve",
@@ -12,7 +12,8 @@
     "lint-fix": "eslint --fix --cache --ext .js,.ts,.tsx .",
     "test": "jest"
   },
-  "author": "",
+  "author": "Tom Watson <tom@tomjwatson.com>",
+  "homepage": "https://github.com/tom-james-watson/detoxed.news",
   "license": "MIT",
   "devDependencies": {
     "@11ty/eleventy": "^0.11.1",

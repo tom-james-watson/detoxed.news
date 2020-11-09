@@ -1,7 +1,8 @@
 body {
   max-width: 800px;
   margin: auto;
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
+    helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
   line-height: 1.3;
   color: #333739;
   background: #f5f8fa;
@@ -16,7 +17,11 @@ header {
   }
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   color: #1e2426;
 }
 
@@ -31,7 +36,7 @@ main {
     padding-left: 10px;
     font-size: 30px;
     line-height: 50px;
-    border-left: 5px solid #A82A2A;
+    border-left: 5px solid #a82a2a;
   }
 
   .topic-header {
@@ -106,7 +111,7 @@ footer {
     .day-header {
       font-size: 25px;
       line-height: 40px;
-      border-left: 4px solid #A82A2A;
+      border-left: 4px solid #a82a2a;
     }
 
     .topic-header {
