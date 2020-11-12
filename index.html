@@ -8,9 +8,9 @@
     <link rel="icon" type="image/svg+xml" href="static/favicon.svg" />
     <title>{{ settings.siteName }}</title>
     <style>
-      {% postcss %}
-        {% include style.css %}
-      {% endpostcss %}
+      {%- postcss -%}
+        {%- include style.css -%}
+      {%- endpostcss -%}
     </style>
   </head>
   <body>
@@ -18,13 +18,13 @@
       <h1>{{ settings.siteName }}</h1>
     </header>
     <main>
-      {% for day in news %}
+      {%- for day in news -%}
         <h2 class="day-header">{{ day.date }}</h2>
         <section class="day">
-          {% for topic in day.topics %}
+          {%- for topic in day.topics -%}
             <h3 class="topic-header">{{ topic.name }}</h3>
             <section class="topic">
-              {% for entry in topic.entries %}
+              {%- for entry in topic.entries -%}
                 <section class="entry">
                   <div>
                     <div>
@@ -37,32 +37,32 @@
                       {%- endfor -%}
                     </div>
                     <div>
-                      {% for tag in entry.tags %}
+                      {%- for tag in entry.tags -%}
                         <a class="entry-tag" href="{{ tag.url }}" rel="nofollow noopener">{{ tag.name }}</a>
-                      {% endfor %}
+                      {%- endfor -%}
                     </div>
-                    {% if entry.url %}
+                    {%- if entry.url -%}
                       <div class="entry-url">
                         Source:
                         <a href="{{ entry.url }}">
                           {{ entry.sourceName }} <img alt="external link" src="/static/images/external-link-icon.svg" />
                         </a>
                       </div>
-                    {% endif %}
+                    {%- endif -%}
                   </div>
-                  {% if entry.ogMetadata.ogImage.url %}
+                  {%- if entry.ogMetadata.ogImage.url -%}
                     <div class="entry-img-container">
                       <a href="{{ entry.url }}">
                         <img class="entry-img" alt="source's featured photo" loading="lazy" src="{{ entry.ogMetadata.ogImage.url }}" width="100" />
                       </a>
                     </div>
-                  {% endif %}
+                  {%- endif -%}
                 </section>
-              {% endfor %}
+              {%- endfor -%}
             </section>
-          {% endfor %}
+          {%- endfor -%}
         </section>
-      {% endfor %}
+      {%- endfor -%}
     </main>
     <footer>
       <p>
