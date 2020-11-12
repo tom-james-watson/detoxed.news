@@ -22,7 +22,7 @@ https://detoxed.news scrapes this page, collating the entries and associating th
 
 The site is a static site built using [11ty](https://www.11ty.dev/). A build dynamically scrapes the current events portal and generates JSON which is then used to compile the `index.html` file.
 
-The site is hosted on Netlify and a new build is kicked off via a webhook every hour. This means the content of the site will keep in sync with the content of the current events portal without any kind of manual intervention ever being necessary.
+The site is hosted on Netlify and a new build is kicked off via a webhook that is called from a cronjob every two hours. This means the content of the site will keep in sync with the content of the current events portal without any kind of manual intervention ever being necessary.
 
 ## Development
 
