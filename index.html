@@ -27,7 +27,15 @@
               {% for entry in topic.entries %}
                 <section class="entry">
                   <div>
-                    <div>{{ entry.body }}</div>
+                    <div>
+                      {%- for entryPart in entry.body -%}
+                        {%- if entryPart.type == "plain" -%}
+                          {{ entryPart.text }}
+                        {%- elsif entryPart.type == "link" -%}
+                          <a class="entry-part-link" href="{{ entryPart.url }}" title="{{ entryPart.title }}" rel="nofollow noopener">{{ entryPart.text }}</a>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </div>
                     <div>
                       {% for tag in entry.tags %}
                         <a class="entry-tag" href="{{ tag.url }}" rel="nofollow noopener">{{ tag.name }}</a>

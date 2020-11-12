@@ -1,7 +1,14 @@
 import axios from "axios";
 import cheerio from "cheerio";
 import ogScraper from "open-graph-scraper";
-import { Entry, OgMetadata, ScraperResult, Tag, Topic } from "./types";
+import {
+  Entry,
+  EntryPart,
+  OgMetadata,
+  ScraperResult,
+  Tag,
+  Topic,
+} from "./types";
 import shuffle from "./shuffle";
 
 const BASE_URL = "https://en.wikipedia.org";
@@ -76,7 +83,7 @@ async function getEntry(
   tags: Tag[],
   withOg: boolean
 ): Promise<Entry> {
-  let body = "";
+  const body: EntryPart[] = [];
   let url: string | undefined;
   let sourceName: string | undefined;
   let ogMetadata: OgMetadata | undefined;
@@ -109,12 +116,20 @@ async function getEntry(
       }
 
       if (liChild.type === "text") {
-        body += liChild.data;
+        body.push({
+          type: "plain",
+          text: liChild.data as string,
+        });
         continue;
       }
 
       if (liChild.type === "tag" && liChild.attribs.title) {
-        body += liChild.children[0].data;
+        body.push({
+          type: "link",
+          text: liChild.children[0].data as string,
+          title: liChild.attribs.title,
+          url: `${BASE_URL}${liChild.attribs.href}`,
+        });
       }
     }
   }

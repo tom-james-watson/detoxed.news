@@ -16,7 +16,8 @@ describe("scraper", () => {
     expect(topic.entries.length).toBeGreaterThan(0);
 
     const story = topic.entries[0];
-    expect(typeof story.body).toEqual("string");
+    expect(Array.isArray(story.body)).toEqual(true);
+    expect(story.body.length).toBeGreaterThanOrEqual(1);
     expect(story.tags.length).toBeGreaterThanOrEqual(0);
     if (story.tags.length > 0) {
       expect(typeof story.tags[0].name).toEqual("string");

@@ -72,6 +72,11 @@ main {
       border-bottom: 1px solid #e1e1e1;
     }
 
+    .entry-part-link {
+      text-decoration: underline;
+      text-decoration-color: #CED9E0;
+    }
+
     .entry-url {
       margin-top: 10px;
       font-size: 14px;

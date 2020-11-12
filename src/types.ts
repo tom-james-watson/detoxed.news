@@ -3,8 +3,15 @@ export interface ScraperResult {
   topics: Topic[];
 }
 
+export interface EntryPart {
+  type: "plain" | "link";
+  text: string;
+  title?: string;
+  url?: string;
+}
+
 export interface Entry {
-  body: string;
+  body: EntryPart[];
   ogMetadata?: OgMetadata;
   sourceName?: string;
   tags: Tag[];
