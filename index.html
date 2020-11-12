@@ -33,12 +33,14 @@
                         <a class="entry-tag" href="{{ tag.url }}" rel="nofollow noopener">{{ tag.name }}</a>
                       {% endfor %}
                     </div>
-                    <div class="entry-url">
-                      Source:
-                      <a href="{{ entry.url }}">
-                        {{ entry.sourceName }} <img alt="external link" src="/static/images/external-link-icon.svg" />
-                      </a>
-                    </div>
+                    {% if entry.url %}
+                      <div class="entry-url">
+                        Source:
+                        <a href="{{ entry.url }}">
+                          {{ entry.sourceName }} <img alt="external link" src="/static/images/external-link-icon.svg" />
+                        </a>
+                      </div>
+                    {% endif %}
                   </div>
                   {% if entry.ogMetadata.ogImage.url %}
                     <div class="entry-img-container">
