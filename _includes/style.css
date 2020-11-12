@@ -73,8 +73,13 @@ main {
     }
 
     .entry-part-link {
-      text-decoration: underline;
-      text-decoration-color: #CED9E0;
+      text-decoration: none;
+      color: #477a95;
+
+      &:focus,
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     .entry-url {
