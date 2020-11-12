@@ -142,15 +142,23 @@ footer {
 
       .entry-part-link {
         pointer-events: none;
+        touch-action: none;
 
+        &:focus,
         &:hover {
-          .entry-part-link {
-            color: initial;
+          text-decoration: none;
+        }
+      }
 
-            &:focus,
-            &:hover {
-              text-decoration: none;
-            }
+      &:hover {
+        .entry-part-link {
+          touch-action: initial;
+          pointer-events: initial;
+          color: #217fb0;
+
+          &:focus,
+          &:hover {
+            text-decoration: underline;
           }
         }
       }
