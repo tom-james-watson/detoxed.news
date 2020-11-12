@@ -84,7 +84,7 @@ async function getEntry(
   if (li.children) {
     for (let i = 0; i < li.children.length; i++) {
       const liChild = li.children[i];
-      if (i === li.children.length - 1) {
+      if (i === li.children.length - 1 && liChild.type === "tag") {
         url = liChild.attribs.href;
         // Sometimes the article link is plain text, sometimes it's
         // (<i>text</i>).
@@ -113,7 +113,7 @@ async function getEntry(
         continue;
       }
 
-      if (liChild.type === "tag") {
+      if (liChild.type === "tag" && liChild.attribs.title) {
         body += liChild.attribs.title;
       }
     }
