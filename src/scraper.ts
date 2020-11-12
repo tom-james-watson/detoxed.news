@@ -114,7 +114,7 @@ async function getEntry(
       }
 
       if (liChild.type === "tag" && liChild.attribs.title) {
-        body += liChild.attribs.title;
+        body += liChild.children[0].data;
       }
     }
   }
