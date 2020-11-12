@@ -74,11 +74,16 @@ main {
 
     .entry-part-link {
       text-decoration: none;
-      color: #477a95;
+    }
 
-      &:focus,
-      &:hover {
-        text-decoration: underline;
+    &:hover {
+      .entry-part-link {
+        color: #217fb0;
+
+        &:focus,
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
 
@@ -134,6 +139,21 @@ footer {
 
     .entry {
       flex-direction: column-reverse;
+
+      .entry-part-link {
+        pointer-events: none;
+
+        &:hover {
+          .entry-part-link {
+            color: initial;
+
+            &:focus,
+            &:hover {
+              text-decoration: none;
+            }
+          }
+        }
+      }
 
       .entry-img-container {
         margin-left: 0;
