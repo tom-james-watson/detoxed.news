@@ -211,10 +211,11 @@ async function getEntriesForDay(
   let topicName = "";
   for (const topLevelItem of topLevelItems) {
     if (
-      topLevelItem.name === "div" &&
-      typeof topLevelItem.children[0].data === "string"
+      topLevelItem.name === "p" &&
+      topLevelItem.children[0].name === "b" &&
+      typeof topLevelItem.children[0].children[0].data === "string"
     ) {
-      topicName = topLevelItem.children[0].data;
+      topicName = topLevelItem.children[0].children[0].data;
       console.log(`Getting entries for ${date} / ${topicName}`);
     } else if (
       topLevelItem.name === "ul" &&
