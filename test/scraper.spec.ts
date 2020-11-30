@@ -14,13 +14,16 @@ describe("scraper", () => {
 
     const topic = result.topics[0];
     expect(topic.entries.length).toBeGreaterThan(0);
+    expect(typeof topic.name).toEqual("string");
+    expect(topic.name).not.toEqual("");
 
     const story = topic.entries[0];
     expect(Array.isArray(story.body)).toEqual(true);
-    expect(story.body.length).toBeGreaterThanOrEqual(1);
+    expect(story.body).not.toEqual("");
     expect(story.tags.length).toBeGreaterThanOrEqual(0);
     if (story.tags.length > 0) {
       expect(typeof story.tags[0].name).toEqual("string");
+      expect(story.tags[0].name).not.toEqual("");
     }
     expect(story.ogMetadata).toEqual({
       ogDescription: "Placeholder description",
