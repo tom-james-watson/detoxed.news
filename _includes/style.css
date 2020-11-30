@@ -68,6 +68,10 @@ main {
     margin-top: 20px;
     padding-bottom: 20px;
 
+    div:first-child {
+      flex-grow: 1;
+    }
+
     &:not(:last-child) {
       border-bottom: 1px solid #e1e1e1;
     }
