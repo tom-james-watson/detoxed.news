@@ -4,6 +4,10 @@ The important news, without the toxicity.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/fd7416e6-fb5e-4d5e-8065-1b6f7f54cbc7/deploy-status)](https://app.netlify.com/sites/detoxed-news/deploys) [![detoxed.news CI](https://circleci.com/gh/tom-james-watson/detoxed.news.svg?style=svg)](https://circleci.com/gh/tom-james-watson/detoxed.news)
 
+<p align="center">
+  <img src="./detoxed-news.png">
+</p>
+
 ## The Why
 
 I try stay informed about current events and important world affairs, but I find the modern always-on, always-dramatic news cycle both tiring and anxiety-inducing. The news industry has an incentive to keep readers coming back - the more time they spend on their sites, the more ad-revenue they can generate. This tends to lead to addiction-forming UX, clickbait, over-dramatization and all-round information overload for the user.
