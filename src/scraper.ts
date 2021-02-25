@@ -53,6 +53,10 @@ async function getOgMetadata(url: string): Promise<OgMetadata | undefined> {
     throw errorDetails;
   }
 
+  if (!result.ogImage.url) {
+    throw new Error("Unable to find ogImage");
+  }
+
   // Check whether image can be hotlinked. If you don't want your image to be
   // hotlinked, why do you put it in your open graph metadata...
   const res = await axios.get(result.ogImage.url, {
@@ -109,6 +113,7 @@ async function getEntry(
           try {
             ogMetadata = await getOgMetadata(url);
           } catch (err) {
+            console.log({ url });
             console.warn("Failed to get og metadata:", err);
           }
         }
