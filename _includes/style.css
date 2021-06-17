@@ -15,6 +15,10 @@ header {
     font-size: 50px;
     font-weight: 900;
     letter-spacing: 1px;
+
+    .header-dot {
+      color: #e10f0f;
+    }
   }
 }
 
@@ -42,7 +46,7 @@ main {
     font-weight: initial;
     letter-spacing: -0.5px;
     text-transform: uppercase;
-    color: #a82a2a;
+    color: #e10f0f;
   }
 
   .topic {
