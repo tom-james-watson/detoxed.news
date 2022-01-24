@@ -1,0 +1,39 @@
+---json
+{
+  "permalink": "feed.xml",
+  "eleventyExcludeFromCollections": true
+}
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Detoxed News</title>
+  <subtitle>The important news, without the toxicity.</subtitle>
+  <link href="https://detoxed.news/feed.xml" rel="self"/>
+  <link href="https://detoxed.news/"/>
+  <updated>{{ collections.news | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <id>https://detoxed.news/</id>
+  <author>
+    <name>Wikipedia Current Events Portal</name>
+  </author>
+    {%- for day in news -%}
+      {%- for topic in day.topics -%}
+        {%- for entry in topic.entries -%}
+            <entry>
+              <title>{{ entry | makeEntryTitle }}</title>
+              <link href="https://detoxed.news/"/>
+              <id>{{ entry.url }}</id>
+              <updated>{{ day.date | parseWikiDate | dateToRfc3339 }}</updated>
+              <content type="html">
+                {%- for entryPart in entry.body -%}
+                  {%- if entryPart.type == "plain" -%}
+                    {{ entryPart.text }}
+                  {%- elif entryPart.type == "link" -%}
+                    &lt;a href="{{ entryPart.url }}" title="{{ entryPart.title }}"&gt;{{ entryPart.text }}&lt;/a&gt;
+                  {%- endif -%}
+                {%- endfor -%}
+              </content>
+          </entry>
+        {%- endfor %}
+      {%- endfor %}
+    {%- endfor %}
+</feed>
