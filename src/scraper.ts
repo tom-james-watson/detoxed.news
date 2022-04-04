@@ -164,12 +164,6 @@ async function getEntriesFromUl(
 ): Promise<Entry[]> {
   const entries: Entry[] = [];
 
-  // There's enough coverage of this elsewhere, plus this generally generates
-  // too many entries. Let's save readers from covid-overload.
-  if (tags.some((tag) => tag.name === "COVID-19 pandemic")) {
-    return entries;
-  }
-
   for (const li of ul.children) {
     if (li.type === "text") {
       continue;
