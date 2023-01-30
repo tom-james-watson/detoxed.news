@@ -104,7 +104,7 @@ async function getEntry(
             ? liChild.children[0].data.replace(/[()]/g, "")
             : undefined;
         } else {
-          sourceName = liChild.children[1].children[0].data
+          sourceName = liChild.children[1].children?.[0].data
             ? liChild.children[1].children[0].data.replace(/[()]/g, "")
             : undefined;
         }
