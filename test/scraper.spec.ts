@@ -1,4 +1,5 @@
 import scraper from "../src/scraper";
+import { describe, expect, it } from "vitest";
 
 describe("scraper", () => {
   it("should scrape entries", async () => {
