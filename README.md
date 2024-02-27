@@ -2,8 +2,6 @@
 
 The important news, without the toxicity.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/fd7416e6-fb5e-4d5e-8065-1b6f7f54cbc7/deploy-status)](https://app.netlify.com/sites/detoxed-news/deploys) [![detoxed.news CI](https://circleci.com/gh/tom-james-watson/detoxed.news.svg?style=svg)](https://circleci.com/gh/tom-james-watson/detoxed.news)
-
 <p align="center">
   <img src="./detoxed-news.png">
 </p>
@@ -26,7 +24,7 @@ https://detoxed.news scrapes this page, collating the entries and associating th
 
 The site is a static site built using [11ty](https://www.11ty.dev/). A build dynamically scrapes the current events portal and generates JSON which is then used to compile the `index.html` file.
 
-The site is hosted on Netlify and a new build is kicked off via a webhook that is called from a cronjob every two hours. This means the content of the site will keep in sync with the content of the current events portal without any kind of manual intervention ever being necessary.
+The site is hosted on Cloudflare Pages and a new build is kicked off via a webhook that is called from a cronjob every four hours. This means the content of the site will keep in sync with the content of the current events portal without any kind of manual intervention ever being necessary.
 
 ## Development
 
