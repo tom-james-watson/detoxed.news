@@ -3,3 +3,4 @@ _site
 .eslintcache
 out
 .vscode
+.zed
