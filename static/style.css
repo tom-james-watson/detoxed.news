@@ -1,11 +1,41 @@
+@media (prefers-color-scheme: light) {
+  body {
+    --body: #333739;
+    --background: #fffffe;
+    --header-dot: #e10f0f;
+    --header: #1e2426;
+    --topic-header: #e10f0f;
+    --entry-tag-bg: #e9ebeb;
+    --entry-tag-fg: #0e1e24;
+    --seperation-border: #e1e1e1;
+    --entry-text-link: #217fb0;
+    --entry-source: #5c7080;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --body: #e6e6e6;
+    --background: #202122;
+    --header-dot: #f45757;
+    --header: #eaecf0;
+    --topic-header: #f45757;
+    --entry-tag-bg: #3d4343;
+    --entry-tag-fg: #e6e6e6;
+    --seperation-border: #3e4042;
+    --entry-text-link: #69b8e2;
+    --entry-source: #a6b4bf;
+  }
+}
+
 body {
   max-width: 800px;
   margin: auto;
   font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
     helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
   line-height: 1.3;
-  color: #333739;
-  background: #fffffe;
+  color: var(--body);
+  background: var(--background);
 }
 
 header {
@@ -17,7 +47,7 @@ header {
     letter-spacing: 1px;
 
     .header-dot {
-      color: #e10f0f;
+      color: var(--header-dot);
     }
   }
 }
@@ -27,7 +57,7 @@ h2,
 h3,
 h4,
 h5 {
-  color: #1e2426;
+  color: var(--header);
 }
 
 a {
@@ -46,7 +76,7 @@ main {
     font-weight: initial;
     letter-spacing: -0.5px;
     text-transform: uppercase;
-    color: #e10f0f;
+    color: var(--topic-header);
   }
 
   .topic {
@@ -58,12 +88,12 @@ main {
     margin-top: 10px;
     margin-right: 5px;
     padding: 5px 10px;
-    background: #e9ebeb;
+    background: var(--entry-tag-bg);
     border-radius: 5px;
     font-size: 13px;
     font-weight: bold;
     text-decoration: none;
-    color: #0e1e24;
+    color: var(--entry-tag-fg);
     white-space: pre-line;
   }
 
@@ -77,7 +107,7 @@ main {
     }
 
     &:not(:last-child) {
-      border-bottom: 1px solid #e1e1e1;
+      border-bottom: 1px solid var(--seperation-border);
     }
 
     .entry-part-link {
@@ -86,7 +116,7 @@ main {
 
     &:hover {
       .entry-part-link {
-        color: #217fb0;
+        color: var(--entry-text-link);
 
         &:focus,
         &:hover {
@@ -98,7 +128,7 @@ main {
     .entry-url {
       margin-top: 10px;
       font-size: 14px;
-      color: #5c7080;
+      color: var(--entry-source);
     }
 
     .entry-img-container {
@@ -161,7 +191,7 @@ footer {
         .entry-part-link {
           touch-action: initial;
           pointer-events: initial;
-          color: #217fb0;
+          color: var(--entry-text-link);
 
           &:focus,
           &:hover {
