@@ -20,7 +20,8 @@
     "paths": {
       "*": ["types/*"]
     },
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   },
   "include": ["src"],
   "exclude": [".eleventy.js"]

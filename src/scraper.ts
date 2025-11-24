@@ -10,6 +10,7 @@ import {
   Topic,
 } from "./types";
 import shuffle from "./shuffle";
+import packageJson from "../package.json";
 
 const BASE_URL = "https://en.wikipedia.org";
 
@@ -47,7 +48,14 @@ async function getOgMetadata(url: string): Promise<OgMetadata | undefined> {
     };
   }
 
-  const { error, result, errorDetails } = await ogScraper({ url });
+  const { error, result, errorDetails } = await ogScraper({
+    url,
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+      Accept: "*/*",
+    },
+  });
 
   if (error) {
     throw errorDetails;
@@ -63,6 +71,8 @@ async function getOgMetadata(url: string): Promise<OgMetadata | undefined> {
     // Placeholder till we get a domain
     headers: {
       Referer: "https://wikipedia.org",
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
     },
   });
 
@@ -261,7 +271,12 @@ async function getEntriesForDay(
  */
 export default async function scrapeEntries(): Promise<ScraperResult[]> {
   const res = await axios.get(
-    "https://en.wikipedia.org/wiki/Portal:Current_events"
+    "https://en.wikipedia.org/wiki/Portal:Current_events",
+    {
+      headers: {
+        "User-Agent": `detoxed.news/${packageJson.version} (+https://github.com/tom-james-watson/detoxed.news; detoxed.news@tomjwatson.com)`,
+      },
+    }
   );
 
   const $ = cheerio.load(res.data);
