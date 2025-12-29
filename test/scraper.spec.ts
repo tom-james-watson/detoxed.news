@@ -26,16 +26,8 @@ describe("scraper", () => {
       expect(typeof story.tags[0].name).toEqual("string");
       expect(story.tags[0].name).not.toEqual("");
     }
-    expect(story.ogMetadata).toEqual({
-      ogDescription: "Placeholder description",
-      ogImage: {
-        height: "100",
-        type: "image/png",
-        url:
-          "https://upload.wikimedia.org/wikipedia/commons/3/33/Al_Jazeera_English_Doha_Newsroom_1.jpg",
-        width: "100",
-      },
-      ogTitle: "Placeholder title",
-    });
+    expect(((story as unknown) as { ogMetadata?: unknown }).ogMetadata).toBe(
+      undefined
+    );
   });
 });
