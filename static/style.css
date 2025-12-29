@@ -130,19 +130,6 @@ main {
       font-size: 14px;
       color: var(--entry-source);
     }
-
-    .entry-img-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: start;
-      margin-left: 20px;
-
-      .entry-img {
-        width: 250px;
-        border-radius: 3px;
-      }
-    }
   }
 }
 
@@ -197,15 +184,6 @@ footer {
           &:hover {
             text-decoration: underline;
           }
-        }
-      }
-
-      .entry-img-container {
-        margin-left: 0;
-        margin-bottom: 5px;
-
-        .entry-img {
-          width: 100%;
         }
       }
     }
