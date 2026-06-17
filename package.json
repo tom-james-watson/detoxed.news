@@ -16,7 +16,7 @@
   "homepage": "https://github.com/tom-james-watson/detoxed.news",
   "license": "MIT",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy": "^3.1.6",
     "@types/cheerio": "^0.22.22",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.6.0",
