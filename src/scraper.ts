@@ -149,7 +149,8 @@ async function getEntriesForDay(
       topLevelItem.name === "ul" &&
       // When the date is first added, it exists as an empty ul, which we
       // need to ignore.
-      topLevelItem.children[0].attribs.class !== "mw-empty-elt"
+      topLevelItem.children.length > 0 &&
+      topLevelItem.children[0].attribs?.class !== "mw-empty-elt"
     ) {
       if (!topicMap[topicName]) {
         topicMap[topicName] = [];
