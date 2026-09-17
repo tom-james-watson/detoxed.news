@@ -26,8 +26,8 @@ describe("scraper", () => {
       expect(typeof story.tags[0].name).toEqual("string");
       expect(story.tags[0].name).not.toEqual("");
     }
-    expect(((story as unknown) as { ogMetadata?: unknown }).ogMetadata).toBe(
-      undefined
+    expect((story as unknown as { ogMetadata?: unknown }).ogMetadata).toBe(
+      undefined,
     );
   });
 });

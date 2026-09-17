@@ -14,14 +14,12 @@ function getTags(li: cheerio.Element): Tag[] {
     .filter((child: cheerio.Element): boolean => {
       return child.name === "a";
     })
-    .map(
-      (child: cheerio.Element): Tag => {
-        return {
-          name: child.attribs.title,
-          url: `${BASE_URL}${child.attribs.href}`,
-        };
-      }
-    );
+    .map((child: cheerio.Element): Tag => {
+      return {
+        name: child.attribs.title,
+        url: `${BASE_URL}${child.attribs.href}`,
+      };
+    });
 }
 
 /**
@@ -90,7 +88,7 @@ async function getEntry(li: cheerio.Element, tags: Tag[]): Promise<Entry> {
  */
 async function getEntriesFromUl(
   ul: cheerio.Element,
-  tags: Tag[]
+  tags: Tag[],
 ): Promise<Entry[]> {
   const entries: Entry[] = [];
 
@@ -107,7 +105,7 @@ async function getEntriesFromUl(
 
     if (childUl) {
       entries.push(
-        ...(await getEntriesFromUl(childUl, [...tags, ...getTags(li)]))
+        ...(await getEntriesFromUl(childUl, [...tags, ...getTags(li)])),
       );
     } else {
       entries.push(await getEntry(li, tags));
@@ -126,7 +124,7 @@ async function getEntriesFromUl(
  */
 async function getEntriesForDay(
   $: cheerio.Root,
-  day: cheerio.Element
+  day: cheerio.Element,
 ): Promise<ScraperResult> {
   const date = day.attribs["aria-label"];
 
@@ -163,14 +161,12 @@ async function getEntriesForDay(
     .filter((topicName: string): boolean => {
       return topicMap[topicName].length > 0;
     })
-    .map(
-      (topicName: string): Topic => {
-        return {
-          name: topicName,
-          entries: topicMap[topicName],
-        };
-      }
-    );
+    .map((topicName: string): Topic => {
+      return {
+        name: topicName,
+        entries: topicMap[topicName],
+      };
+    });
 
   // Randomize the order of the topics. Wikipedia is just alphabetical and
   // maybe it gets boring to always read about Armed conflicts and attacks
@@ -190,10 +186,11 @@ export default async function scrapeEntries(): Promise<ScraperResult[]> {
   const res = await axios.get(
     "https://en.wikipedia.org/wiki/Portal:Current_events",
     {
+      timeout: 30000,
       headers: {
         "User-Agent": `detoxed.news/${packageJson.version} (+https://github.com/tom-james-watson/detoxed.news; detoxed.news@tomjwatson.com)`,
       },
-    }
+    },
   );
 
   const $ = cheerio.load(res.data);
