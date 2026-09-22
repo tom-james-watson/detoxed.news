@@ -4,8 +4,6 @@ import { Entry, EntryPart, ScraperResult, Tag, Topic } from "./types";
 import shuffle from "./shuffle";
 import packageJson from "../package.json";
 
-const BASE_URL = "https://en.wikipedia.org";
-
 /**
  * Extract a Tag from an li element.
  */
@@ -17,7 +15,7 @@ function getTags(li: cheerio.Element): Tag[] {
     .map((child: cheerio.Element): Tag => {
       return {
         name: child.attribs.title,
-        url: `${BASE_URL}${child.attribs.href}`,
+        url: `${child.attribs.href}`,
       };
     });
 }
@@ -63,7 +61,7 @@ async function getEntry(li: cheerio.Element, tags: Tag[]): Promise<Entry> {
           type: "link",
           text: liChild.children[0].data as string,
           title: liChild.attribs.title,
-          url: `${BASE_URL}${liChild.attribs.href}`,
+          url: `${liChild.attribs.href}`,
         });
       }
     }
